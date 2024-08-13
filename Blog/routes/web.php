@@ -10,6 +10,7 @@ Route::get('/', function () {
 
 Route::get('dashboard', [AuthController::class, 'dashboard']);
 Route::get('/profile', function () {return view('auth.profile');})->name('profile');
+Route::get('/register', function () {return view('auth.register');})->name('register');
 Route::put('/profile', [AuthController::class, 'update'])->name('update');
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('custom-login', [AuthController::class, 'login'])->name('login.custom');

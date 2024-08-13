@@ -61,9 +61,12 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show($id)
     {
-        //
+
+            $post = Post::find($id);
+            return view('posts.show', compact('post'));
+
     }
 
     /**
@@ -82,9 +85,13 @@ class PostController extends Controller
         $post->update([
             'title' => $request->input('title'),
             'content' => $request->input('content'),
+          
         ]);
-
-        return redirect()->route('categories.index');
+        $users= User::all();
+        $categories = Category::all();
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        return view('auth.dashboard',
+        ['posts' =>$posts,'categories'=>$categories,'users'=>$users]);
     }
 
     /**
@@ -92,6 +99,11 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        
+        $post->delete();
+        $users= User::all();
+        $categories = Category::all();
+        $posts = Post::orderBy('created_at', 'desc')->get();
+        return view('auth.dashboard',
+        ['posts' =>$posts,'categories'=>$categories,'users'=>$users]);
     }
 }

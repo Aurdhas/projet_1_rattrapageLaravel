@@ -99,7 +99,7 @@ class AuthController extends Controller
 
         }
 
-        return redirect("login")->withSuccess('You are not allowed to access');
+        return view('auth.home');
     }
 
     public function signOut()
@@ -107,6 +107,6 @@ class AuthController extends Controller
         Session::flush();
         Auth::logout();
 
-        return Redirect('login');
+        return view('auth.home');
     }
 }
