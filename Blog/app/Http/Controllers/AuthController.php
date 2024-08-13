@@ -28,6 +28,7 @@ class AuthController extends Controller
         $identifications=$request->only('email','password');
 
         if(Auth::attempt($identifications)){
+            Session::regenerate();
             return redirect()->intended('dashboard')
             ->withSuccess('Signed in');
         }
