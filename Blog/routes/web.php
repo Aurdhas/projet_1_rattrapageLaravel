@@ -2,14 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PostController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 
-Route::get('dashboard', [AuthController::class, 'dashboard']);
+Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/profile', function () {return view('auth.profile');})->name('profile');
+Route::get('/show', [PostController::class, 'show'])->name('show');
 Route::get('/register', function () {return view('auth.register');})->name('register');
 Route::put('/profile', [AuthController::class, 'update'])->name('update');
 Route::get('login', [AuthController::class, 'index'])->name('login');

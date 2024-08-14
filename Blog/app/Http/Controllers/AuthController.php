@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AuthController extends Controller
 {
@@ -96,7 +97,7 @@ class AuthController extends Controller
             $categories = Category::all();
             $posts = Post::orderBy('created_at', 'desc')->get();
             return view('auth.dashboard',
-            ['posts' =>$posts,'categories'=>$categories,'users'=>$users]);
+        ['posts' =>$posts,'categories'=>$categories,'users'=>$users,'posts'=>DB::table('posts')->paginate(8)]);
 
         }
 
